@@ -13,13 +13,14 @@ function ExpenseList() {
         <Row>
           {expenses.length > 0 ? (
             <>
-              <h4 className='text-center mt-4 mb-2 text-info'>Expenditure Information</h4>
+              <h4 className='text-center mt-4 mb-2 text-info'>Expenditure History</h4>
               <Table bordered hover variant='dark'>
                 <thead>
                   <tr>
                     <th className='text-center text-warning'>Date</th>
-                    <th className='text-center text-warning'>Amount</th>
                     <th className='text-center text-warning'>Item</th>
+                    <th className='text-center text-warning'>Amount</th>
+                    <th className='text-center text-warning'>Category</th>
                     <th className='text-center text-warning'>Actions</th>
                   </tr>
                 </thead>

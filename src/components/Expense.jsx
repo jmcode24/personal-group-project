@@ -3,7 +3,8 @@ import moment from 'moment';
 import { Button, Modal, InputGroup, FormControl, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { delExpenseAction, editExpenseAction } from '../actions/actions';
-import { FaAnchor } from 'react-icons/fa';
+import { BiCollapse, BiPencil  } from 'react-icons/bi';
+import { GiMoneyStack } from 'react-icons/gi';
 
 function Expense(props) {
   const expense = props.expense;
@@ -13,37 +14,43 @@ function Expense(props) {
     dispatch(delExpenseAction(expense.id));
   };
 
-  const [amount, setAmount] = useState('');
-  const [item, setItem ] = useState('');
+  const [item, setItem] = useState(expense.item)
+  const [amount, setAmount] = useState(expense.amount);
+  const [category, setCategory ] = useState(expense.category);
+  const [isShowing, setIsShowing] = useState(false);
+
+  const handleItemChange = (e) => {
+    setItem(e.target.value);
+  };
 
   const handleAmountChange = (e) => {
-    setAmount(e.target.value)
+    setAmount(e.target.value);
+  };
+
+  const handleShowing = () => {
+    setIsShowing(true);
   };
 
 
   const options = [
     "Accomodation",
-    "Transportation",
+    "Food & Drinks",
     "Housing & Rent",
-    "Miscellaneous"
+    "Miscellaneous",
+    "Transportation",
   ]
 
   const handleChange = (e) => {
-    setItem(e.target.value);
-  };
-
-  const [isShowing, setIsShowing] = useState(false);
-
-  const handleShowing = () => {
-    setIsShowing(true);
+    setCategory(e.target.value);
   };
 
   const handleSubmit = () => {
     let expenseData = {
       date: new Date(),
       id: expense.id,
-      amount: amount,
       item: item,
+      amount: amount,
+      category: category,
     }
 
     dispatch(editExpenseAction(expense.id, expenseData));
@@ -58,9 +65,10 @@ function Expense(props) {
   return (
     <>
       <tr>
-        <td className='text-center'>{moment(expense.date).format('ddd, MMM Do YYYY')}</td>
-        <td className='text-center'>{expense.amount}</td>
+        <td className='text-center'>{moment(expense.date).format('MMMM,Do-YY')}</td>
         <td className='text-center'>{expense.item}</td>
+        <td className='text-center'>{expense.amount}</td>
+        <td className='text-center'>{expense.category}</td>
         <td>
           <div className='d-flex justify-content-around'>
             <Button variant='primary' onClick={handleShowing}>Edit</Button>
@@ -75,7 +83,17 @@ function Expense(props) {
         </Modal.Header>
         <Modal.Body>
         <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1" className='fw-bold text-success'>₵</InputGroup.Text>
+            <InputGroup.Text id="basic-addon1" className='fw-bold text-success'><BiPencil /></InputGroup.Text>
+            <FormControl type="text" required
+              value={item} onChange={handleItemChange}
+              placeholder="Item Bought"
+              aria-label="name of item"
+              aria-describedby="basic-addon1"
+              className='text-white'
+            />
+          </InputGroup>
+        <InputGroup className="mb-3">
+        <InputGroup.Text id="basic-addon1" className='fw-bold text-success'><GiMoneyStack /></InputGroup.Text>
         <FormControl type="number" required
           value={amount} onChange={handleAmountChange}
           placeholder="Amount Spent"
@@ -85,9 +103,9 @@ function Expense(props) {
         />
       </InputGroup>
       <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1" className='fw-bold text-success'><FaAnchor /></InputGroup.Text>
-          <Form.Select className='text-white' required aria-label="Default select example" onChange={handleChange}>
-            <option value={item}>Click & Select</option>
+        <InputGroup.Text id="basic-addon1" className='fw-bold text-success'><BiCollapse /></InputGroup.Text>
+          <Form.Select className='text-white' required aria-label="Default select example" value={category} onChange={handleChange}>
+            <option>Click & Select</option>
             {options.map((option, index) => {
               return (
                 <option className='text-primary' key={index} value={option}>

@@ -5,7 +5,7 @@ const initialState = {
 function expReducer (state = initialState, action) {
   switch (action.type) {
     case "ADD_EXPENSE":
-      return {...state, expenses: [ state.expenses, action.payload]};
+      return {...state, expenses: [ ...state.expenses, action.payload]};
     
     case "DELETE_EXPENSE":
       const filteredexpenses = state.expenses.filter((expense) => {
