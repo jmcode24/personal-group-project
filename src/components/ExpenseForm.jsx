@@ -24,7 +24,7 @@ function ExpenseForm() {
 
   const options = [
     "Accomodation",
-    "Food & Drinks",
+    "Food & Drink",
     "Housing & Rent",
     "Miscellaneous",
     "Transportation",
