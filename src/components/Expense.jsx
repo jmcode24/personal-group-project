@@ -66,9 +66,9 @@ function Expense(props) {
     <>
       <tr>
         <td className='text-center'>{moment(expense.date).format('MMMM,Do-YY')}</td>
-        <td className='text-center'>{expense.item}</td>
-        <td className='text-center'>¢{expense.amount}</td>
-        <td className='text-center'>{expense.category}</td>
+        <td className='text-center'><span className='text-info'>•</span>{expense.item}</td>
+        <td className='text-center'><span className='text-success'>¢</span>{expense.amount}</td>
+        <td className='text-center'><span className='text-secondary'>⁍</span>{expense.category}</td>
         <td>
           <div className='d-flex justify-content-around'>
             <Button variant='primary' onClick={handleShowing}>Edit</Button>
