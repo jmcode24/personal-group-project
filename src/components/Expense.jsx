@@ -67,7 +67,7 @@ function Expense(props) {
       <tr>
         <td className='text-center'>{moment(expense.date).format('MMMM,Do-YY')}</td>
         <td className='text-center'>{expense.item}</td>
-        <td className='text-center'>{expense.amount}</td>
+        <td className='text-center'>¢{expense.amount}</td>
         <td className='text-center'>{expense.category}</td>
         <td>
           <div className='d-flex justify-content-around'>
