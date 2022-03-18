@@ -31,7 +31,7 @@ function ExpenseList() {
                 <tbody>
                 {expenses.map((expense, index) => {
                   return (
-                    <Group key={index} expense={expense} />
+                    <Group key={expense.id} expense={expense} index={index}/>
                   );
                 })}
                 </tbody>
