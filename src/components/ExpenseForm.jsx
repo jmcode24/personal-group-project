@@ -41,7 +41,7 @@ function ExpenseForm() {
       id: uuid(),
       date: new Date(),
       item: item,
-      amount: amount,
+      amount: amount * 1,
       category: category,
     };
 
@@ -90,8 +90,8 @@ function ExpenseForm() {
                 })}
               </Form.Select>
             </InputGroup>
-            <div className='text-center mt-2'>
-             <Button variant='success' type='submit'>Check Expenditure</Button>
+            <div className='text-center'>
+             <Button variant='success' type='submit' className='mb-4'>Add Expense</Button>
             </div>
         </Form>
       </Container>

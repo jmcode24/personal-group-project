@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { delExpenseAction, editExpenseAction } from '../actions/actions';
 import { BiCollapse, BiPencil  } from 'react-icons/bi';
 import { GiMoneyStack } from 'react-icons/gi';
+import NumberFormat from 'react-number-format';
 
 function Expense(props) {
   const expense = props.expense;
@@ -49,7 +50,7 @@ function Expense(props) {
       date: new Date(),
       id: expense.id,
       item: item,
-      amount: amount,
+      amount: amount * 1,
       category: category,
     }
 
@@ -67,7 +68,7 @@ function Expense(props) {
       <tr>
         <td className='text-center'>{moment(expense.date).format('MMMM,Do-YY')}</td>
         <td className='text-center'><span className='text-info'>•</span>{expense.item}</td>
-        <td className='text-center'><span className='text-success'>¢</span>{expense.amount}</td>
+        <td className='text-center'><span className='text-success'>¢</span><NumberFormat displayType="text" value={expense.amount} thousandSeparator={true} /></td>
         <td className='text-center'><span className='text-secondary'>⁍</span>{expense.category}</td>
         <td>
           <div className='d-flex justify-content-around'>

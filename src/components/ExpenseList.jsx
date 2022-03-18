@@ -2,11 +2,15 @@ import React from 'react';
 import Group from './Expense';
 import { Container, Row, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import NumberFormat from 'react-number-format';
 
 function ExpenseList() {
   const expenses = useSelector((state) => {
     return state.expenses;
   })
+
+  const totalExpenses = expenses.reduce((prev, cur) => (prev += cur.amount), 0);
+
   return (
     <>
       <Container>
@@ -32,6 +36,7 @@ function ExpenseList() {
                 })}
                 </tbody>
               </Table>
+              <h5 className='text-center mt-2 text-secondary'>Total Expenditure: <span className='text-success'>¢</span><span className='text-white'><NumberFormat displayType="text" value={totalExpenses} thousandSeparator={true} /></span></h5>
             </>
           ) : ('')}
           
