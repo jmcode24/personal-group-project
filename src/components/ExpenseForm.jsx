@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Form, InputGroup, FormControl, Button, Alert } from 'react-bootstrap';
 import { BiCollapse, BiPencil } from 'react-icons/bi';
 import { GiMoneyStack } from 'react-icons/gi';
+import { RiErrorWarningLine, RiCheckboxCircleLine } from 'react-icons/ri'
 import { useDispatch } from 'react-redux';
 import { addExpenseAction } from '../actions/actions';
 import { v4 as uuid} from 'uuid';
@@ -56,7 +57,7 @@ function ExpenseForm() {
       setSuccess(false);
       setTimeout(() => {
         setSuccess(true);
-      }, 3000);
+      }, 2000);
   
       dispatch(addExpenseAction(newExpense));
   
@@ -71,8 +72,8 @@ function ExpenseForm() {
       <Container>
         <h1 className='text-secondary mt-2 mb-2'>Expense Tracker</h1>
         <Form onSubmit={handleSubmit}>
-        {!error ? <Alert variant='danger'>Check all fields</Alert> : '' }
-        {!success ? <Alert variant='success'>Expense added</Alert> : '' }
+        {!error ? <Alert variant='danger' className='text-center'><RiErrorWarningLine/> Some fields are empty</Alert> : '' }
+        {!success ? <Alert variant='success' className='text-center'><RiCheckboxCircleLine/> Expense added</Alert> : '' }
           <InputGroup className="mb-3">
             <InputGroup.Text id="basic-addon1" className='fw-bold text-success'><BiPencil /></InputGroup.Text>
             <FormControl type="text"
